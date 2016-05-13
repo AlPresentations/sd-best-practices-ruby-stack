@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+
+    <title>Software Development Best Practices for Ruby Stack</title>
+
+    <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+    <meta name="author" content="Hakim El Hattab">
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <link rel="stylesheet" href="css/reveal.min.css">
+    <link rel="stylesheet" href="css/theme/beige.css" id="theme">
+
+    <!-- For syntax highlighting -->
+    <link rel="stylesheet" href="lib/css/zenburn.css">
+
+    <!-- If the query includes 'print-pdf', use the PDF print sheet -->
+    <script>
+      document.write( '<link rel="stylesheet" href="css/print/' + ( window.location.search.match( /print-pdf/gi ) ? 'pdf' : 'paper' ) + '.css" type="text/css" media="print">' );
+    </script>
+
+    <!--[if lt IE 9]>
+    <script src="lib/js/html5shiv.js"></script>
+    <![endif]-->
+  </head>
+
+  <body>
+  <!--
+
+  ідеї:
+  1) роздати всім по листочку і попросити записувати пункти, які були цікаві або нові, це буде анонімно, просто для можливості оцінити корисність і куди можливо можна копати глибше.
+  2) має бути більше діалогу, більше обоговорення хто як вважеє, має бути інтерактив
+
+   -->
+    <div class="reveal">
+
+      <!-- Any section element inside of this container is displayed as a slide -->
+      <div class="slides">
+        <section>
+          <h1>Software Development Best Practices</h1>
+          <h2>for Ruby Stack</h2>
+          <p>
+            <small>Created by <a href="mail://Dmytro_Panov@epam.com">Dmytro Panov</a> </small>
+          </p>
+        </section>
+
+        <section>
+          <div><h2>Agenda</h2></div>
+          <div>
+            <div align="center" style="width: 33%; float: left;">
+              <h3>Part 1</h3>
+              <ol>
+                <li>Coding Standards</li>
+                <li>Source Code Management</li>
+                <li>Code Review</li>
+                <li>Automatic Code Inspection</li>
+                <li>Technical Debt Management</li>
+                <li>Testing</li>
+              </ol>
+            </div>
+
+            <div align="center" style="width: 33%; float: left;">
+              <h3>Part 2</h3>
+              <ol>
+                <li>CI & Automated Builds</li>
+                <li>CI & Automated Deployment</li>
+                <li>Development Environment Standard</li>
+                <li>Availability & Reliability</li>
+                <li>Performance Testing</li>
+              </ol>
+            </div>
+
+            <div align="center" style="width: 33%; float: right;">
+              <h3>Part 3</h3>
+              <ol>
+                <li>User Experience</li>
+                <li>Security Management</li>
+                <li>3rd Party Software Reuse</li>
+                <li>Requirenments Management</li>
+                <li>Estimation Practices</li>
+                <li>Team Collaboration</li>
+              </ol>
+            </div> 
+          </div>  
+        </section>
+
+        <section>
+          <div align="left">
+            <h2>Dmytro Panov</h2>
+          </div>  
+          <div align="left" style="width: 30%; float: left;">
+            <img style="width: 90%; max-height: none; max-width: none; border: none;" src="./images/dmytro1.jpg">
+          </div>  
+          <div align="right" style="width: 67%; float: right;">
+            <ul>
+              <li>10 - IT, Ruby\RoR - 8, JavaScript - 6, Java - 3</li>
+              <li>JRuby & Enterprise Applications</li>
+              <li>Education, eDiscovery and RPM</li>
+              <li>Oracle, PostgreSQL and MySQL (SQL and Optimisation)</li>
+            </ul>
+            <br />            <br />            <br />
+            <ul>
+              <li>More 100s tech interview over the world</li>
+              <li>Prepare several Traning & Presentations</li>
+              <li>Being an Expert in 5 trainee groups (3 months)</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <div align="left">
+            <h2>Dmytro Panov</h2>
+          </div>  
+          <div align="left" style="width: 30%; float: left;">
+            <img style=" max-height: none; max-width: none; border: none;" src="./images/dmytro.JPG">
+          </div>  
+          <div align="right" style="width: 67%; float: right;">
+            <ul>
+              <li>Interesting in Software Architecture, Big Data and IoT</li>
+              <li>I like Hiking & Traveling</li>
+            </ul>
+          </div>
+        </section>
+
+
+        <section>
+          <h2>Software Development Best Practices</h2> 
+          <div align="center">
+            <img style="width: 550px; height: 305px; max-height: none; max-width: none; border: none;" src="./images/best-practices.jpeg">
+          </div>  
+          <div align="center">
+            <ul>
+              <li>Recommendations</li>
+              <li>Experience</li>
+              <li>Time Actuality</li>
+              <li>Value & Results</li>
+              <li>Internal Community</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h1>Coding Standards</h1>
+        </section>
+
+        <section>
+          <h2>Coding Standards</h2>
+          <div align="center">
+            <br />
+            <ul>
+              <li>Policy is documented and accessible in the project for whole team.</li>
+              <li>Project structure and architecture follows industry paradigm.</li>
+            </ul>
+
+            <br />
+            <img style=" max-height: none; max-width: none;border: none;" src="./images/CodingStandards.png">
+            <br />
+            <p>The Ruby Style Guide - <a href="https://github.com/bbatsov/ruby-style-guide">github.com/bbatsov/ruby-style-guide</a></p>
+            <p>The Rails Style Guide - <a href="https://github.com/bbatsov/rails-style-guide">github.com/bbatsov/rails-style-guide</a></p>
+            <br />
+            <p>JavaScript(CoffeScript), CSS(SCSS/LESS), ...</p>
+          </div>  
+        </section>
+
+        <section>
+          <h1>Source Code Management</h1> 
+          <div align="center">
+            <img style="width: 30%;height: 30%; border: none;" src="./images/github-octocat.jpg">
+          </div>
+        </section>
+
+        <section>
+          <h2>Source Code Management</h2>
+          <div align="center">
+            <img style="width: 30%;height: 30%; border: none;" src="./images/git1.jpg">
+          </div>
+          <ul>
+            <li>Code before master is verified and inspected</li>
+            <li>Descriptive messages and work item for each commit</li>
+            <li>Database schema, dictionaries and scripts are in.</li>
+            <li>Binaries and user settings are out</li>
+            <li>Consistent and documented branching strategy (Git Flow)</li>
+          </ul>
+        </section>  
+
+        <section>
+          <div style="float:left; width: 30%;">
+            <h3 align="center">
+                <h2>Git Flow</h2>
+            </h3>
+          </div>
+          <div align="center" style="float: right; width: 70%">
+            <img style="width: 55%; max-height: none; max-width: none;border: none;" src="./images/git-flow.png">
+          </div>
+        </section> 
+
+        <section>
+          <h2>Code Review</h2>
+          <div align="center" style="float: left; width: 50%;">
+            <img style="width: 100%; max-height: none; max-width: none;border: none;" src="./images/code-review.jpg">
+          </div>
+          <div align="center" style="float: right; width: 50%;">
+            <br /><br />
+            <ol>
+              <li>Over-the-shoulder</li>
+              <li>Email pass-around</li>
+              <li>Pair programming</li>
+              <li>Tool-assisted</li>
+              <li>Formal inspections</li>
+            </ol>  
+          </div>                
+        </section>
+
+        <section style="width: 110%">
+          <h2>Code Review</h2>
+          <div align="center" style="float: left; width: 29%;">
+            <img style="width: 90%; max-height: none; max-width: none;border: none;" src="./images/code_review1.jpeg">
+          </div>
+          <div align="center" style="float: right; width: 70%;">
+            <br /><br />
+            <ul>
+              <li>Procedure is defined and documented</li>
+              <li>Checklist is used</li>
+              <li>Part of review is automated (specialized review tools are used)</li>
+              <li>Review workflow is using best practices for selected tool</li>
+              <li>All changes should be reviewed and validated</li>
+              <li>Process ensures review defects or/and action items are fixed</li>
+            </ul>  
+          </div>                  
+        </section>
+
+        <section style="width: 110%">
+          <h2>Code Review Tools</h2>
+          <div align="center">
+            <img style="width: 15%;height: 30%; border: none;" src="./images/github.jpg">
+            <img style="width: 15%;height: 30%; border: none;" src="./images/crucible_blue.png">
+            <img style="width: 8%;height: 30%; border: none;" src="./images/ReviewBoard.png">
+            <img style="width: 9%;height: 30%; border: none;" src="./images/Gerrit.png">            
+            <img style="width: 15%;height: 30%; border: none;" src="./images/Collaborator-Logo-SM.jpg">            
+          </div>  
+          <div align="center">
+            <br />
+            <ul>
+              <li>GitHub Code Review (Pull Requests)</li>
+              <li>Crucible (Atlassian)</li>
+              <li>Review Board</li>
+              <li>Gerrit</li>
+              <li>Collaborator</li>
+            </ul>  
+          </div>                  
+        </section>
+
+        <section>
+          <h2>Automatic Code Inspection</h2> 
+          <div align="center">
+            <img style=" border: none;" src="./images/code-inspection.jpg">
+          </div>
+        </section>
+
+        <section style="width: 110%">
+          <h2>Automatic Code Inspection</h2>
+          <div align="center" style="float: left; width: 29%;">
+            <img style="width: 90%; max-height: none; max-width: none;border: none;" src="./images/robocop.jpg">
+          </div>
+          <div align="center" style="float: right; width: 70%;">
+            <br /><br />
+            <ul>
+              <li>Procedure is defined and communicated to team</li>
+              <li>Code conventions are checked by automatic code inspection</li>
+              <li>Tools are automatically run on a regular intervals or certain events (commit, build, at specific time) during all development process</li>              
+            </ul>  
+          </div>                  
+        </section>
+
+        <section style="width: 110%">
+          <div align="center">
+            <img style="width: 30%; max-height: none; max-width: none;border: none;" src="./images/rubo-logo-horizontal.png">
+          </div>
+          <div align="center">
+          <br />
+            <ul>
+              <li>Ensure code inspections acording to ruby-style-guide and rails-style-guide</li>
+              <li>Could be configured with additional rules</li>
+              <li>Config file .rubocop-settings.yml</li>              
+            </ul>
+          </div>
+          <br /> 
+          <img style="width: 70%; max-height: none; max-width: none;border: none;" src="./images/rubocop-realworld.png">                 
+        </section>
+
+        <section style="width: 110%">
+          <div align="center">
+            <img style="width: 30%; max-height: none; max-width: none;border: none;" src="./images/Hound logo.svg">
+          </div>
+          <div align="center">
+            <br /><br />
+            <ul>
+              <li>Open source CI written on Rails with codebase on GitHub </li>
+              <li>Run rubocop against pull request diff</li>
+              <li>Easy to install and configure</li>            
+            </ul>  
+          </div>                  
+        </section>
+
+        <section>
+          <h2>Automatic Code Inspection</h2>
+            <ul>
+              <li>Code quality metrics are defined and documented</li>
+              <li>Code duplication detection tools are used</li>
+              <li>Goals based on code metrics are explicitly linked to project goals</li>
+              <li>Code quality related metrics are regulary collected and reviewed</li>
+              <li>Metrics gathering is automated</li>
+              <li>The code inspection issues are tracked and fixed regularly (tech debt)</li>
+            </ul>        
+        </section>  
+
+        <section>
+          <h2>Automatic Code Inspection Tools</h2>
+          <div align="center">
+            <br />
+            <ul>
+              <li>Metric_fu(cane, churn, Flog, Flay, Reek, Roodi, Saikuro, Code Statistic, Rails Best Practices)</li>
+              <li>rubycritic</li>            
+              <li>debride - uncalled methods</li>
+              <li>pronto</li>   
+            </ul>  
+          </div>                  
+        </section>
+
+
+        <section>
+          <h2>Technical Debt Management</h2> 
+          <div align="center">
+            <img style="width: 70%; height: 70%; border: none;" src="./images/tech-debt.jpg">
+          </div>
+        </section>
+
+        <section>
+          <h2>Technical Debt Management</h2>
+          <div align="center">
+            <img style="float: left; width: 40%;height: 30%; border: none;" src="./images/td.png">
+            <img style="float: right; width: 40%;height: 30%; border: none;" src="./images/td2.png">
+          </div>
+          <ul>
+            <li>Tracked regularly and is transparent for stakeholders (Team, PM, Product Owner, Client)</li>
+            <li>Team prevents TD from growing</li>
+            <li>Technical Debt list is reviewed after/before each sprint</li>
+          </ul>      
+        </section>  
+
+        <section>
+          <h2>Technical Debt Management</h2>
+          <div align="center">
+            <img style="width: 70%;height: 30%; border: none;" src="./images/TechnicalDebt2.jpg">
+          </div>
+          <ul>              
+            <li>TD growing automatially (as systems evolves, versions)</li>
+          </ul>     
+        </section>  
+
+        <section>
+          <h2>Technical Debt Management</h2>
+          <div align="center">
+            <img style="width: 35%;height: 30%; border: none;" src="./images/tech-debt.png">
+          </div>
+            <ul>
+            <li>The cost of TD is included in estimation</li>
+            <li>Cleanup-releases when TD overcomes threshold</li>
+            <li>Refactoring of code is conducted on a regular base as part of TD items</li>
+            <li>Refactoring is accompanied by tests (unit, integration, etc.)</li>
+          </ul>        
+        </section>
+
+        <section>
+          <h2>Testing</h2>
+          <div align="center">
+            <img style="width: 70%; height: 70%; border: none;" src="./images/software-testers.jpg">
+          </div>
+        </section>
+
+        <section>
+          <h2>Test Types</h2>
+          <ul>
+            <li>Unit Testing</li>
+            <li>Integration Testing</li>
+            <li>User Aceptance Testing</li>
+            <li>Functional Testing</li>
+            <li>Non-Functional Testing</li>
+          </ul>        
+        </section>
+
+        <section>
+          <h2>Unit Testing</h2>
+          <ul>
+            <li>The testing policy is defined and documented</li>
+            <li>Tests are F.I.R.S.T. (Fast, Isolated, Repeatable, Self-Verifying, Timely)</li>
+            <li>Test code is separated from production code</li>
+            <li>Defects detected should be fixed before moving to the next stage</li>
+            <li>Code coverage by test is tracked regularly</li>
+            <li>Code coverage by test target is above agreed threehold, by default 90%</li>
+            <li>TDD, BDD</li>
+            <li>Specification, Rump-up material</li>
+          </ul>        
+        </section>
+
+        <section>
+          <h2>Testing Tools</h2>
+          <div align="center">
+            <img style="width: 13%;height: 30%; border: none;" src="./images/RSpec 150.png">
+            <img style="width: 15%;height: 30%; border: none;" src="./images/capybara.jpg">
+            <img style="width: 11%;height: 30%; border: none;" src="./images/cucumber.png">
+            <img style="width: 15%;height: 30%; border: none;" src="./images/phantomjs-logo.png">            
+          </div>
+          <ul>
+            <li>RSpec</li>
+            <li>Capybara</li>
+            <li>Cucumber</li>
+            <li>Poltergaist</li>
+            <li>PhantomJS</li>
+          </ul>
+          <br />
+          <div align="left">
+            <p><b>Test Coverage: </b>&nbsp;simplecov</p>
+            <p><b>Test Utilities: </b>&nbsp;factory_girl, should-matchers, database_cleaner, vcr, webmock, ...</p>
+            <p><b>Env Preloaders:</b>&nbsp;spork/spring/zeus/theine</p>
+            <p>paralel_tests</p>
+          </div>
+        </section>        
+
+        <section>
+          <h2>Non-Functional Testing</h2>
+          <div align='center' style="float: left; width: 49%;">
+            <ul>      
+              <li>Reliability testing</li>
+              <li>Usability testing</li>
+              <li>Efficiency testing</li>
+              <li>Maintainability testing</li>
+              <li>Portability testing</li>
+              <li>Baseline testing</li>
+              <li>Compliance testing</li>
+              <li>Documentation testing</li>
+              <li>Endurance testing</li>
+            </ul>
+          </div>
+          <div align='center' style="float: right; width: 49%;">
+            <ul>    
+              <li>Load testing</li>
+              <li><b>Performance testing</b></li>
+              <li>Compatibility testing</li>
+              <li><b>Security testing</b></li>
+              <li>Scalability testing</li>
+              <li><b>Volume testing</b></li>
+              <li>Stress testing</li>
+              <li>Recovery testing</li>
+              <li>Internationalization and Localization testing</li>
+            </ul>
+          </div>
+        </section>
+
+        <section>
+          <h2>Questions...</h2>
+
+          <div align="center">
+            <img style="width: 126.589px; height: 126.801px; max-height: none; max-width: none;" src="./250px-Arabic_Question_mark_(RTL).svg.png">
+          </div>
+        </section>    
+
+        <section>
+          <h2>Thanks!</h2>
+        </section>
+
+
+      </div>
+
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.min.js"></script>
+    <script>
+
+      // Full list of configuration options available here:
+      // https://github.com/hakimel/reveal.js#configuration
+      Reveal.initialize({
+        controls: true,
+        progress: true,
+        history: true,
+        center: true,
+    
+        width: 1260,
+        height: 700,
+
+        theme: Reveal.getQueryHash().theme, // available themes are in /css/theme
+        transition: Reveal.getQueryHash().transition || 'default', // default/cube/page/concave/zoom/linear/fade/none
+
+        // Parallax scrolling
+        // parallaxBackgroundImage: 'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg',
+        // parallaxBackgroundSize: '2100px 900px',
+
+        // Optional libraries used to extend on reveal.js
+        dependencies: [
+          { src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+          { src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+          { src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } },
+          { src: 'plugin/zoom-js/zoom.js', async: true, condition: function() { return !!document.body.classList; } },
+          { src: 'plugin/notes/notes.js', async: true, condition: function() { return !!document.body.classList; } }
+        ]
+      });
+
+    </script>
+
+  </body>
+</html>

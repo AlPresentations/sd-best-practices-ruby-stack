@@ -1,0 +1,1 @@
+$: << File.dirname(File.dirname(__FILE__))
